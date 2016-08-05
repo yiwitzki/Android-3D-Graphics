@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Android3DLibsTest.iml" filepath="$PROJECT_DIR$/Android3DLibsTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RajawaliDemo/RajawaliDemo.iml" filepath="$PROJECT_DIR$/RajawaliDemo/RajawaliDemo.iml" />
+    </modules>
+  </component>
+</project>
