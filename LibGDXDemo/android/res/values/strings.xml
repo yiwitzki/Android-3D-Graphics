@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LibGDXDemo</string>
+    <string name="create_scene">Create Scene</string>
+</resources>
