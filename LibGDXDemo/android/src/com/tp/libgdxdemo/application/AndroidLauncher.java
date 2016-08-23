@@ -10,18 +10,11 @@ import com.tp.libgdxdemo.R;
 
 public class AndroidLauncher extends Activity
 {
-    private Button createSceneBtn;
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
-
-    }
-    private void initView()
-    {
-        createSceneBtn = (Button) findViewById(R.id.create_scene_btn);
     }
 
 	public void createScene(View v)
@@ -29,4 +22,15 @@ public class AndroidLauncher extends Activity
 		Intent intent = new Intent(AndroidLauncher.this, CreateSceneActivity.class);
 		startActivity(intent);
 	}
+
+    public void interactWithScene(View v)
+    {
+        Intent intent = new Intent(AndroidLauncher.this, InteractWithSceneActivity.class);
+        startActivity(intent);
+    }
+    public void animationScene(View v)
+    {
+        Intent intent = new Intent(AndroidLauncher.this, AnimationActivity.class);
+        startActivity(intent);
+    }
 }

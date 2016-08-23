@@ -18,12 +18,19 @@
             android:theme="@android:style/Theme.Material.Light.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".application.CreateSceneActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".application.InteractWithSceneActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".application.AnimationActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"/>
     </application>

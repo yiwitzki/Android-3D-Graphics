@@ -3,4 +3,6 @@
 
     <string name="app_name">LibGDXDemo</string>
     <string name="create_scene">Create Scene</string>
+    <string name="interact_with_scene">Interact Scene</string>
+    <string name="animation_scene">Animation</string>
 </resources>

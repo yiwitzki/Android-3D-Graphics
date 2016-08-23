@@ -35,4 +35,14 @@ public class ObjectInstance extends ModelInstance
         bounds.getDimensions(dimensions);
         radius = dimensions.len() / 2f;
     }
+
+    public ObjectInstance(Model model, float x, float y, float z)
+    {
+        super(model, x, y, z);
+        calculateBoundingBox(bounds);
+        bounds.getCenter(center);
+        bounds.getDimensions(dimensions);
+        radius = dimensions.len() / 2f;
+    }
+
 }

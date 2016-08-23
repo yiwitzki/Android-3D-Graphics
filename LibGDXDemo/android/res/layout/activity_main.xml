@@ -8,9 +8,21 @@
 
     <Button
         android:id="@+id/create_scene_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:onClick="createScene"
         android:text="@string/create_scene"/>
+    <Button
+        android:id="@+id/interact_with_scene_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:onClick="interactWithScene"
+        android:text="@string/interact_with_scene"/>
+    <Button
+        android:id="@+id/animation_scene_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:onClick="animationScene"
+        android:text="@string/animation_scene"/>
 
 </LinearLayout>
