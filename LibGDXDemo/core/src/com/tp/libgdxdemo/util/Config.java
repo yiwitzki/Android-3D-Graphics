@@ -14,5 +14,9 @@ public class Config
         public static final String LAMP_NODE_NAME = "Lamp";
         public static final String CAMERA_NODE_NAME = "Camera";
     }
+    public static class Texture
+    {
+        public static final String[] PLAYER_TEXTURE = {"ozil.jpg", "giroud.jpg", "sanchez.jpg", "laoye.jpg"};
+    }
 
 }

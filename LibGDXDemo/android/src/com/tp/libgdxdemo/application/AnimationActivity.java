@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.tp.libgdxdemo.scene.AnimationScene;
+import com.tp.libgdxdemo.scene.FogTest;
 import com.tp.libgdxdemo.view.PlayerInfoDialog;
 
 /**
@@ -18,5 +19,6 @@ public class AnimationActivity extends AndroidApplication
         super.onCreate(savedInstanceState);
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         initialize(new AnimationScene(new PlayerInfoDialog(this)), config);
+       // initialize(new FogTest(), config);
     }
 }

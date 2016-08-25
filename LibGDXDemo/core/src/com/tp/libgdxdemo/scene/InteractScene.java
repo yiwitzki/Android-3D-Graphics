@@ -58,7 +58,6 @@ public class InteractScene extends InputAdapter implements ApplicationListener
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-        //environment.set(new ColorAttribute(ColorAttribute.Fog, 0.13f, 0.13f, 0.13f, 1f));
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(0f, 20f, 20f);
         cam.lookAt(0,0,0);
@@ -69,15 +68,15 @@ public class InteractScene extends InputAdapter implements ApplicationListener
         camController = new CameraInputController(cam);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, camController));
         batch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("alonso.jpeg"));
+        texture = new Texture(Gdx.files.internal("ozil.jpg"));
         assets = new AssetManager();
         assets.load(Config.Model.PLAYER_MODEL_NAME, Model.class);
-        assets.load("spacesphere.obj", Model.class);
+        assets.load("pitch.g3db", Model.class);
         loading = true;
     }
     private void doneLoading() {
         Model ship = assets.get(Config.Model.PLAYER_MODEL_NAME, Model.class);
-        Model space = assets.get("spacesphere.obj", Model.class);
+        Model space = assets.get("pitch.g3db", Model.class);
         ObjectInstance spaceInstance = new ObjectInstance(space);
         playerInstance = new ObjectInstance(ship, Config.Model.PLAYER_NODE_NAME);
 
@@ -105,6 +104,7 @@ public class InteractScene extends InputAdapter implements ApplicationListener
         if (playerInstance != null)
         {
             Material material = playerInstance.getMaterial("PlayerFront");
+            material.set(new ColorAttribute(ColorAttribute.Diffuse, 0f,0f,0f,1));
             material.set(TextureAttribute.createDiffuse(texture));
         }
         batch.end();

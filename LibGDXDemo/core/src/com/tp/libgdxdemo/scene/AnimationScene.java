@@ -56,25 +56,25 @@ public class AnimationScene extends InputAdapter implements ApplicationListener
     public void create ()
     {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
         modelBatch = new ModelBatch();
         environment = new Environment();
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 100f, 100f, 100f, 1f));
+
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1.f));
+        environment.set(new ColorAttribute(ColorAttribute.Fog, 0.13f, 0.13f, 0.13f, 0.1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-        environment.add((shadowLight = new DirectionalShadowLight(1024, 1024, 30f, 30f, 1f, 100f)).set(0.8f, 0.8f, 0.8f, -1f, -.8f,
-                -.2f));
-//        environment.shadowMap = shadowLight;
-//        environment.set(new ColorAttribute(ColorAttribute.Fog, 0.13f, 0.13f, 0.13f, 1f));
+
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(0f, 20f, 20f);
         cam.lookAt(0,0,0);
-        cam.near = 1f;
-        cam.far = 300f;
+        cam.near = 0.1f;
+        cam.far = 1300f;
         cam.update();
 
         camController = new CameraInputController(cam);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, camController));
         batch = new SpriteBatch();
-        playerTexture = new Texture(Gdx.files.internal("alonso.jpeg"));
+        playerTexture = new Texture(Gdx.files.internal("ozil.jpg"));
         pitchTexture = new Texture(Gdx.files.internal("Vegetation_Grass_Artificial.jpg"));
         assets = new AssetManager();
         assets.load(Config.Model.PLAYER_MODEL_NAME, Model.class);
@@ -87,20 +87,17 @@ public class AnimationScene extends InputAdapter implements ApplicationListener
         ObjectInstance spaceInstance = new ObjectInstance(space);
         playerInstance = new ObjectInstance(ship, Config.Model.PLAYER_NODE_NAME);
         Material material = playerInstance.getMaterial("PlayerFront");
-        Material pitchMarterial = spaceInstance.getMaterial("Vegetation_Grass_Artificial");
-        BlendingAttribute blendingAttribute = new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        //blendingAttribute.opacity = 0.1f;
-        material.set(TextureAttribute.createDiffuse(playerTexture), blendingAttribute);
-        pitchMarterial.set(TextureAttribute.createDiffuse(pitchTexture));
+        Material pitchMaterial = spaceInstance.getMaterial("Vegetation_Grass_Artificial");
+
+
+        material.set(TextureAttribute.createDiffuse(playerTexture), new ColorAttribute(ColorAttribute.Specular, 1, 1, 1, 1));
+        pitchMaterial.set(TextureAttribute.createDiffuse(pitchTexture));
 
 
         playerInstance.transform.setToRotation(Vector3.X, 90).trn(0,0f,0);
         spaceInstance.transform.trn(0,15,0);
         instances.add(playerInstance);
         instances.add(spaceInstance);
-       // Gdx.app.debug("material", playerInstance.model.nodes.size + "");
-        for (int i = 0; i < spaceInstance.materials.size; i++)
-            Gdx.app.debug("material", spaceInstance.materials.get(i).id);
 
         loading = false;
     }
@@ -110,8 +107,11 @@ public class AnimationScene extends InputAdapter implements ApplicationListener
         if (loading && assets.update())
             doneLoading();
         camController.update();
-        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+
+        Gdx.gl.glClearColor(0.13f, 0.13f, 0.13f, 1);
+
 
 //        shadowLight.begin(Vector3.Zero, cam.direction);
 //        modelBatch.begin(shadowLight.getCamera());
@@ -123,17 +123,18 @@ public class AnimationScene extends InputAdapter implements ApplicationListener
         modelBatch.begin(cam);
         modelBatch.render(instances, environment);
         modelBatch.end();
+
         batch.begin();
         if (playerInstance != null)
         {
 //            final float delta = Math.min(1/30f, Gdx.graphics.getDeltaTime());
-//            //playerInstance.transform.rotate(Vector3.Z, 90 * delta);
-//            //playerInstance.transform.trn(9 * delta, 0, 0);
+//            playerInstance.transform.rotate(Vector3.Z, 90 * delta);
+//            playerInstance.transform.trn(9 * delta, 0, 0);
 //            cam.translate(delta * 10f, 0f, 0f);
 //            Vector3 pos = new Vector3();
 //            cam.lookAt(playerInstance.transform.getTranslation(pos));
 //            cam.update();
-           // playerInstance.transform.scale((1 + 1 * delta), (1 + 1 * delta), (1 + 1 * delta));
+//            playerInstance.transform.scale((1 + 1 * delta), (1 + 1 * delta), (1 + 1 * delta));
         }
         batch.end();
     }
