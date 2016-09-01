@@ -4,8 +4,11 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.tp.libgdxdemo.ShadowMapping;
 import com.tp.libgdxdemo.scene.InteractScene;
+import com.tp.libgdxdemo.scene.MainScreen;
 import com.tp.libgdxdemo.scene.ModelTest;
+import com.tp.libgdxdemo.scene.RenderTest;
 import com.tp.libgdxdemo.view.PlayerInfoDialog;
 
 /**

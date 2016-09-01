@@ -7,7 +7,8 @@ public class Config
 {
     public static class Model
     {
-        public static final String PLAYER_MODEL_NAME = "PlayerV4.1.g3db";
+        //public static final String PLAYER_MODEL_NAME = "models//PlayerV4.1.g3db";
+        public static final String PLAYER_MODEL_NAME = "models//PlayerTest.g3db";
         public static final String PLAYER_NODE_NAME = "Player";
         public static final String TEAM_NODE_NAME = "Team";
         public static final String TEAMFLAG_NODE_NAME = "TeamFlag";
@@ -16,7 +17,8 @@ public class Config
     }
     public static class Texture
     {
-        public static final String[] PLAYER_TEXTURE = {"ozil.jpg", "giroud.jpg", "sanchez.jpg", "laoye.jpg"};
+        public static final String TEXTURE_PATH = "texture//";
+        public static final String[] PLAYER_TEXTURE = {TEXTURE_PATH + "ozil.jpg", TEXTURE_PATH + "giroud.jpg", TEXTURE_PATH + "sanchez.jpg", TEXTURE_PATH + "laoye.jpg"};
     }
 
 }

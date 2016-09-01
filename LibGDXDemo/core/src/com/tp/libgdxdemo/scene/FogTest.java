@@ -44,7 +44,7 @@ import com.badlogic.gdx.utils.Array;
 import com.tp.libgdxdemo.util.Config;
 import com.tp.libgdxdemo.util.GdxTest;
 import com.tp.libgdxdemo.util.ObjectInstance;
-import com.tp.libgdxdemo.util.SimpleTextureShader;
+import com.tp.libgdxdemo.ShaderProgram.SimpleTextureShader;
 
 public class FogTest extends GdxTest implements ApplicationListener, Screen
 {

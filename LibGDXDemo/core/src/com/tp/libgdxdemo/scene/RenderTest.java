@@ -5,12 +5,11 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
@@ -19,7 +18,6 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.environment.SpotLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -29,7 +27,10 @@ import com.tp.libgdxdemo.intf.ICrossPlatformInterface;
 import com.tp.libgdxdemo.util.Config;
 import com.tp.libgdxdemo.util.ObjectInstance;
 
-public class ModelTest extends InputAdapter implements ApplicationListener
+/**
+ * Created by TP on 16/8/30.
+ */
+public class RenderTest extends InputAdapter implements ApplicationListener
 {
 
     public PerspectiveCamera cam;
@@ -49,7 +50,7 @@ public class ModelTest extends InputAdapter implements ApplicationListener
 
     ICrossPlatformInterface mInterface;
 
-    public ModelTest(ICrossPlatformInterface iCrossPlatformInterface)
+    public RenderTest(ICrossPlatformInterface iCrossPlatformInterface)
     {
         this.mInterface = iCrossPlatformInterface;
     }
@@ -75,7 +76,7 @@ public class ModelTest extends InputAdapter implements ApplicationListener
         loadTexture();
         assets = new AssetManager();
         assets.load(Config.Model.PLAYER_MODEL_NAME, Model.class);
-        assets.load("models//pitch.g3db", Model.class);
+        assets.load("models//EuroArena.g3db", Model.class);
         loading = true;
     }
 
@@ -98,13 +99,15 @@ public class ModelTest extends InputAdapter implements ApplicationListener
     private void createPlayer()
     {
         Model player = assets.get(Config.Model.PLAYER_MODEL_NAME, Model.class);
+        for (int i = 0; i < player.meshes.size; i++)
+            Gdx.app.debug("node", player.meshes.get(i).toString());
+
+
         for (int i = 0; i < 4; i++)
         {
             ObjectInstance instance = new ObjectInstance(player, Config.Model.PLAYER_NODE_NAME);
-            for (int j = 0; j < instance.materials.size; j++)
-                Gdx.app.debug("material", instance.materials.get(j).id);
-            Material material = instance.getMaterial("PlayerPortrait");
-            //material.set(new ColorAttribute(ColorAttribute.Diffuse, 255f,255f,255f,1));
+            Material material = instance.getMaterial("PlayerFront");
+            material.set(new ColorAttribute(ColorAttribute.Diffuse, 255f,255f,255f,1));
             material.set(TextureAttribute.createDiffuse(playerTexture.get(i)));
             playerArray.add(instance);
             instance.transform.setToRotation(Vector3.X, 90).trn(-15 + i * 10,0f,0);
@@ -113,11 +116,11 @@ public class ModelTest extends InputAdapter implements ApplicationListener
     }
     private void createPitch()
     {
-        Model pitch = assets.get("models//pitch.g3db", Model.class);
+        Model pitch = assets.get("models//EuroArena.g3db", Model.class);
         pitchInstance = new ObjectInstance(pitch);
 //        Material pitchMaterial = pitchInstance.getMaterial("Vegetation_Grass_Artificial");
 //        pitchMaterial.set(TextureAttribute.createDiffuse(pitchTexture));
-        pitchInstance.transform.trn(0,15,0);
+        pitchInstance.transform.trn(0,0,0);
         instances.add(pitchInstance);
     }
     @Override
@@ -164,12 +167,14 @@ public class ModelTest extends InputAdapter implements ApplicationListener
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
         selecting = getObject(screenX, screenY);
+        Gdx.app.debug("material", "touch down" + selecting);
         return selecting >= 0;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
+        Gdx.app.debug("material", "touch up");
         if (selecting >= 0) {
             if (selecting == getObject(screenX, screenY))
             {
@@ -214,6 +219,7 @@ public class ModelTest extends InputAdapter implements ApplicationListener
 
             if (distance >= 0f && dist2 > distance)
                 continue;
+            Gdx.app.debug("material", "get object" + instance.radius);
             if (dist2 <= instance.radius * instance.radius) {
                 result = i;
                 distance = dist2;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.tp.libgdxdemo.scene.InteractScene;
+import com.tp.libgdxdemo.scene.ShaderTest;
 import com.tp.libgdxdemo.view.PlayerInfoDialog;
 
 /**
@@ -17,6 +18,7 @@ public class InteractWithSceneActivity extends AndroidApplication
     {
         super.onCreate(savedInstanceState);
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        initialize(new InteractScene(new PlayerInfoDialog(this)), config);
+        //initialize(new InteractScene(new PlayerInfoDialog(this)), config);
+        initialize(new ShaderTest(), config);
     }
 }
